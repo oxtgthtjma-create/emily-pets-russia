@@ -67,7 +67,11 @@ export default function ProductShowcase({
       </div>
       <div className="product-grid">
         {visible.map((product) => (
-          <article className="showcase-product" key={product.id}>
+          <article
+            className="showcase-product"
+            id={"product-" + product.id}
+            key={product.id}
+          >
             <div className="product-photo">
               <Image
                 src={product.image}

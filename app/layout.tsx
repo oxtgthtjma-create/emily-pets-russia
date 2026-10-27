@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Arrow } from "../components/icons";
+import SiteFooter from "../components/site-footer";
 import MobileMenu from "../components/mobile-menu";
 import "./style.css";
 import "./sections.css";
@@ -57,26 +57,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Link href="/assortment#bedding">Подстилки для мелких животных</Link>
         </nav>
         <main id="main">{children}</main>
-        <footer className="site-footer container">
-          <div className="footer-top">
-            <Link className="brand" href="/">
-              Emily<span> pets</span>
-            </Link>
-            <nav aria-label="Навигация в подвале">
-              <Navigation />
-            </nav>
-            <Link className="inline-link" href="/project">
-              Начать проект
-              <Arrow />
-            </Link>
-          </div>
-          <div className="footer-bottom">
-            <span>Наполнители и подстилки · Российский рынок</span>
-            <span>
-              Предварительная версия. Условия поставки подтверждаются отдельно.
-            </span>
-          </div>
-        </footer>
+        <SiteFooter />
       </body>
     </html>
   );
