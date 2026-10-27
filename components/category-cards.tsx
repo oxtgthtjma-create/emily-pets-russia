@@ -9,7 +9,7 @@ export default function CategoryCards() {
         <article className="category-card" key={c.id}>
           <Link
             className="category-image"
-            href={`/assortment#${c.id}`}
+            href={`/assortment?category=${c.id}#products`}
             tabIndex={-1}
             aria-hidden="true"
           >

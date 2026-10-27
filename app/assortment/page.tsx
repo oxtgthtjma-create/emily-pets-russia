@@ -1,15 +1,25 @@
-import Image from "next/image";
 import Link from "next/link";
+import ProductShowcase from "../../components/product-showcase";
 import ProjectCta from "../../components/project-cta";
-import { Arrow } from "../../components/icons";
 import { categories } from "../../data/categories";
+import { Arrow } from "../../components/icons";
 export const metadata = {
   title: "Ассортимент закупочного проекта",
   description:
-    "Согласуйте позиции наполнителей и подстилок в одном проекте для российского рынка.",
+    "Шесть направлений наполнителей и подстилок: выберите материал и добавьте его в русскоязычный закупочный проект.",
   alternates: { canonical: "/assortment" },
 };
-export default function Assortment() {
+export default async function Assortment({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string | string[] }>;
+}) {
+  const candidate = (await searchParams).category;
+  const initialCategory =
+    typeof candidate === "string" &&
+    ["cat-litter", "bedding"].includes(candidate)
+      ? candidate
+      : "all";
   return (
     <>
       <section className="page-intro container">
@@ -17,71 +27,52 @@ export default function Assortment() {
           Главная
         </Link>
         <h1>
-          Два направления.
+          Ассортимент, который
           <br />
-          Ваш ассортимент.
+          можно собрать в проект.
         </h1>
         <p className="lead">
-          Выберите категории, которые планируете включить в закупочный проект.
-          Конкретные исполнения и условия требуют подтверждения.
+          Выберите материал и добавьте его в закупочную спецификацию.
         </p>
-        <div className="category-shortcuts">
-          {categories.map((c) => (
-            <a href={`#${c.id}`} key={c.id}>
-              {c.title}
-              <Arrow />
-            </a>
-          ))}
-        </div>
       </section>
-      <div className="container">
-        {categories.map((c) => (
-          <section className="category-detail" key={c.id} id={c.id}>
-            <div className="detail-image">
-              <Image
-                src={c.image}
-                alt={c.alt}
-                fill
-                sizes="(max-width: 820px) 100vw, 50vw"
-              />
-            </div>
-            <div>
-              <h2>{c.title}</h2>
-              <p>{c.description}</p>
-              <div className="material-list">
-                {c.materials.map((m) => (
-                  <span key={m}>{m}</span>
-                ))}
-              </div>
-              <h3>Что указать в проекте</h3>
+      <section
+        className="container catalog-section"
+        aria-label="Направления продукции"
+      >
+        <ProductShowcase
+          key={initialCategory}
+          initialCategory={initialCategory}
+        />
+      </section>
+      <section className="section container procurement-inputs">
+        <div className="section-heading">
+          <h2>
+            За каждой позицией —<br />
+            понятные параметры.
+          </h2>
+          <p>Неизвестные значения можно оставить на согласование.</p>
+        </div>
+        <div className="input-category-grid">
+          {categories.map((category) => (
+            <article id={category.id} key={category.id}>
+              <h3>{category.title}</h3>
               <ul className="input-list">
-                {c.inputs.map((input) => (
+                {category.inputs.map((input) => (
                   <li key={input}>{input}</li>
                 ))}
               </ul>
-              <p className="caption">{c.note}</p>
-              <Link className="button" href={`/project?category=${c.id}`}>
-                Добавить в проект
+              <p className="caption">{category.note}</p>
+              <Link
+                className="inline-link"
+                href={"/project?category=" + category.id}
+              >
+                Перейти к проекту
                 <Arrow />
               </Link>
-            </div>
-          </section>
-        ))}
-      </div>
-      <aside className="source-note container">
-        <div>
-          <h2>Нужны сведения о конкретном продукте?</h2>
-          <p>
-            Описания продукции и информация о производстве — на основном сайте
-            Emily pets. Изображения здесь иллюстрируют категории и не заменяют
-            спецификацию.
-          </p>
+            </article>
+          ))}
         </div>
-        <a className="inline-link" href="https://emilypets.com/ru/product/">
-          Продукция Emily pets
-          <Arrow />
-        </a>
-      </aside>
+      </section>
       <ProjectCta />
     </>
   );

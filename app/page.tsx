@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import CategoryCards from "../components/category-cards";
+import ProductShowcase from "../components/product-showcase";
+import BlogPreview from "../components/article-card";
 import ProjectCta from "../components/project-cta";
 import {
   Arrow,
@@ -114,6 +116,16 @@ export default function Home() {
         </div>
         <CategoryCards />
       </section>
+      <section className="section container home-products">
+        <div className="section-heading">
+          <h2>Материалы для вашего проекта</h2>
+          <Link className="inline-link" href="/assortment">
+            Весь ассортимент
+            <Arrow />
+          </Link>
+        </div>
+        <ProductShowcase />
+      </section>
       <section className="brief-banner container">
         <Image src="/images/project-brief.webp" alt="" fill sizes="100vw" />
         <div>
@@ -140,6 +152,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+      <BlogPreview />
       <section className="faq section container">
         <h2>Перед началом проекта</h2>
         {questions.map((q) => (

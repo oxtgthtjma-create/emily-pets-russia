@@ -12,8 +12,10 @@ const fieldLabels: Record<string, string> = {
 };
 export default function ProjectForm({
   initialCategory = "",
+  initialItems = "",
 }: {
   initialCategory?: string;
+  initialItems?: string;
 }) {
   const [status, setStatus] = useState("");
   const [format, setFormat] = useState("txt");
@@ -94,6 +96,7 @@ export default function ProjectForm({
       <label>
         Позиции и упаковка *
         <textarea
+          defaultValue={initialItems}
           name="items"
           required
           maxLength={4000}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Arrow } from "../components/icons";
 import MobileMenu from "../components/mobile-menu";
 import "./style.css";
+import "./sections.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://emily-pets-russia.vercel.app"),
   title: {
@@ -17,8 +18,8 @@ function Navigation() {
   return (
     <>
       <Link href="/assortment">Ассортимент</Link>
-      <Link href="/#how-it-works">Как это работает</Link>
-      <Link href="/about">О проекте</Link>
+      <Link href="/blog">Блог</Link>
+      <Link href="/about">О компании</Link>
     </>
   );
 }
