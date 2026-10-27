@@ -1,9 +1,11 @@
 "use client";
 import { useState, type FormEvent } from "react";
 import { projectCategoryNames } from "../data/categories";
+import { purchaseModes } from "../data/product-facts";
 import { DownloadIcon } from "./icons";
 const fieldLabels: Record<string, string> = {
   category: "Направление проекта",
+  purchaseMode: "Формат закупки",
   items: "Позиции и упаковка",
   quantity: "Планируемое количество",
   unit: "Единица",
@@ -13,9 +15,11 @@ const fieldLabels: Record<string, string> = {
 export default function ProjectForm({
   initialCategory = "",
   initialItems = "",
+  initialMode = "brand",
 }: {
   initialCategory?: string;
   initialItems?: string;
+  initialMode?: string;
 }) {
   const [status, setStatus] = useState("");
   const [format, setFormat] = useState("txt");
@@ -34,6 +38,9 @@ export default function ProjectForm({
     );
     requirements.category =
       projectCategoryNames[requirements.category] ?? requirements.category;
+    requirements.purchaseMode =
+      purchaseModes[requirements.purchaseMode as keyof typeof purchaseModes] ??
+      requirements.purchaseMode;
     const text =
       format === "json"
         ? JSON.stringify(
@@ -82,6 +89,16 @@ export default function ProjectForm({
     >
       <h2>Требования к закупке</h2>
       <p className="form-note">Поля со знаком * обязательны.</p>
+      <label>
+        Формат закупки
+        <select name="purchaseMode" defaultValue={initialMode}>
+          {Object.entries(purchaseModes).map(([key, label]) => (
+            <option key={key} value={key}>
+              {label}
+            </option>
+          ))}
+        </select>
+      </label>
       <label>
         Направление проекта *
         <select name="category" required defaultValue={initialCategory}>

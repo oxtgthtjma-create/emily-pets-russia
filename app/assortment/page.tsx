@@ -1,3 +1,4 @@
+import PurchaseOptions from "../../components/purchase-options";
 import Link from "next/link";
 import ProductShowcase from "../../components/product-showcase";
 import ProjectCta from "../../components/project-cta";
@@ -32,9 +33,11 @@ export default async function Assortment({
           можно собрать в проект.
         </h1>
         <p className="lead">
-          Выберите материал и добавьте его в закупочную спецификацию.
+          Продукция в упаковке Emily pets и под вашей маркой: сравните фасовки и
+          характеристики.
         </p>
       </section>
+      <PurchaseOptions />
       <section
         className="container catalog-section"
         aria-label="Направления продукции"

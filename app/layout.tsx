@@ -19,6 +19,7 @@ function Navigation() {
     <>
       <Link href="/assortment">Ассортимент</Link>
       <Link href="/blog">Блог</Link>
+      <Link href="/freight">Доставка</Link>
       <Link href="/about">О компании</Link>
     </>
   );

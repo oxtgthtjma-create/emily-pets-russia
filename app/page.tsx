@@ -1,3 +1,4 @@
+import PurchaseOptions from "../components/purchase-options";
 import Image from "next/image";
 import Link from "next/link";
 import CategoryCards from "../components/category-cards";
@@ -80,6 +81,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <PurchaseOptions />
       <div className="benefits container">
         <div>
           <span className="benefit-icon">

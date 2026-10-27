@@ -2,6 +2,7 @@ import Link from "next/link";
 import ProjectForm from "../../components/project-form";
 import { DocumentIcon } from "../../components/icons";
 import { projectCategoryNames } from "../../data/categories";
+import { purchaseModes } from "../../data/product-facts";
 import { getShowcaseProduct } from "../../data/products";
 export const metadata = {
   title: "Русскоязычная спецификация закупочного проекта",
@@ -15,12 +16,17 @@ export default async function Project({
   searchParams: Promise<{
     category?: string | string[];
     product?: string | string[];
+    mode?: string | string[];
   }>;
 }) {
   const query = await searchParams;
   const product = getShowcaseProduct(
     typeof query.product === "string" ? query.product : undefined,
   );
+  const selectedMode =
+    typeof query.mode === "string" && Object.hasOwn(purchaseModes, query.mode)
+      ? query.mode
+      : "brand";
   const category = product?.category ?? query.category;
   const selectedCategory =
     typeof category === "string" &&
@@ -44,7 +50,8 @@ export default async function Project({
       </div>
       <div className="project-layout">
         <ProjectForm
-          key={selectedCategory + (product?.id ?? "")}
+          key={selectedCategory + (product?.id ?? "") + selectedMode}
+          initialMode={selectedMode}
           initialCategory={selectedCategory}
           initialItems={
             product

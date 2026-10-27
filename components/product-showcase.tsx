@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { showcaseProducts } from "../data/products";
+import { productFacts, purchaseModes } from "../data/product-facts";
 import { Arrow, Chevron } from "./icons";
 const filters = [
   { id: "all", name: "Все направления" },
@@ -15,11 +16,34 @@ export default function ProductShowcase({
   initialCategory?: string;
 }) {
   const [category, setCategory] = useState(initialCategory);
+  const [mode, setMode] = useState("brand");
   const visible = showcaseProducts.filter(
     (product) => category === "all" || product.category === category,
   );
   return (
     <div className="product-showcase" id="products">
+      <div className="purchase-mode">
+        <label>
+          Формат закупки
+          <select
+            value={mode}
+            onChange={(event) => setMode(event.target.value)}
+          >
+            {Object.entries(purchaseModes).map(([key, label]) => (
+              <option key={key} value={key}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <p>
+          {mode === "brand"
+            ? "Существующее оформление Emily pets. Выберите фасовку и количество; наличие подтверждается отдельно."
+            : mode === "custom"
+              ? "Ваша торговая марка: согласуем макет, фасовку и параметры партии."
+              : "Сравните фирменную упаковку Emily pets и вариант под вашей маркой."}
+        </p>
+      </div>
       <div className="product-toolbar">
         <div
           className="filter-buttons"
@@ -60,7 +84,9 @@ export default function ProductShowcase({
                   "/project?category=" +
                   product.category +
                   "&product=" +
-                  product.id
+                  product.id +
+                  "&mode=" +
+                  mode
                 }
                 aria-label={"В проект: " + product.name}
               >
@@ -69,6 +95,39 @@ export default function ProductShowcase({
               </Link>
             </div>
             <p>{product.description}</p>
+            <p className="product-brand">
+              Emily pets · {productFacts[product.id].pack}
+            </p>
+            <details className="product-details">
+              <summary>
+                Характеристики и фасовки
+                <Chevron />
+              </summary>
+              <dl className="product-facts">
+                {productFacts[product.id].rows.map(([label, value]) => (
+                  <div key={label}>
+                    <dt>{label}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))}
+              </dl>
+              {productFacts[product.id].note && (
+                <p className="caption">{productFacts[product.id].note}</p>
+              )}
+              <p className="caption">
+                Данные заявлены производителем на сайте emilypets.com. Проверено
+                27.10.2026. Это сведения о продуктовой линейке, а не паспорт
+                партии или подтверждение каждой показанной упаковки. Запросите
+                спецификацию и методику испытаний.
+              </p>
+              <a
+                href={productFacts[product.id].source}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Источник характеристик ↗
+              </a>
+            </details>
             <details className="product-details">
               <summary>
                 Что согласовать
