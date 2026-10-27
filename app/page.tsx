@@ -1,2 +1,158 @@
-import Link from 'next/link';
-export default function Home(){return <><section className="hero"><div><h1>Подготовьте закупочный проект для российского рынка</h1><p className="lead">Наполнители для кошек и подстилки для мелких животных. Соберите требования к ассортименту, фасовке и партии в одном русскоязычном документе.</p><Link className="button" href="/project">Подготовить проект</Link><Link className="textlink" href="/assortment">Выбрать направление</Link></div><aside className="project-preview"><span>Ваш проект</span><h2>От ассортимента<br/>к спецификации</h2><ol><li>Категория и назначение</li><li>SKU и версия упаковки</li><li>Объём и пункт назначения</li><li>Вопросы для согласования</li></ol><p>Документ остаётся у вас до передачи поставщику.</p></aside></section><section><div className="section-heading"><h2>Два направления.<br/>Один подход к закупке.</h2><p>Начните с задачи вашей компании, затем уточните характеристики конкретной продукции.</p></div><div className="directions"><article><span className="number">01</span><h3>Наполнители для кошек</h3><p>Зафиксируйте материал, ассортиментные позиции, единицу фасовки и параметры, которые требуется подтвердить на образце.</p><Link href="/assortment#cat-litter">Подготовить ассортимент</Link></article><article><span className="number">02</span><h3>Подстилки для мелких животных</h3><p>Укажите вид материала, назначение, формат упаковки и условия хранения, которые важны вашему каналу продаж.</p><Link href="/assortment#bedding">Определить требования</Link></article></div></section><section className="process"><h2>Согласуйте детали до расчёта</h2><div className="steps"><article><h3>1. Опишите проект</h3><p>Категории, позиции и ожидаемый объём. Неизвестные параметры можно оставить на согласование.</p></article><article><h3>2. Сохраните требования</h3><p>Скачайте файл проекта. Сайт не отправляет его и не сохраняет введённые данные на сервере.</p></article><article><h3>3. Подтвердите условия</h3><p>Согласуйте спецификацию, документы, стоимость и логистику с поставщиком отдельно.</p></article></div></section><section className="closing"><h2>Начните с ясной спецификации</h2><p>Один проект для нескольких категорий и вопросов закупочной команды.</p><Link className="button" href="/project">Создать документ проекта</Link></section></>}
+import Image from "next/image";
+import Link from "next/link";
+import CategoryCards from "../components/category-cards";
+import ProjectCta from "../components/project-cta";
+import {
+  Arrow,
+  BoxIcon,
+  Chevron,
+  DocumentIcon,
+  DownloadIcon,
+} from "../components/icons";
+export const metadata = { alternates: { canonical: "/" } };
+const steps = [
+  {
+    title: "Выберите направление",
+    text: "Укажите категории: наполнители для кошек, подстилки для мелких животных или оба направления.",
+    Icon: BoxIcon,
+  },
+  {
+    title: "Уточните детали",
+    text: "Опишите ключевые параметры: материал, упаковку, объём, особенности и пожелания.",
+    Icon: DocumentIcon,
+  },
+  {
+    title: "Сохраните проект",
+    text: "Скачайте файл с собранными параметрами, чтобы обсудить конкретные условия.",
+    Icon: DownloadIcon,
+  },
+];
+const questions = [
+  {
+    title: "Можно объединить наполнители и подстилки?",
+    answer:
+      "Да. Выберите «Наполнители и подстилки» в форме проекта. В описании укажите каждую позицию отдельно: материал, фасовку и количество.",
+  },
+  {
+    title: "Что делать, если параметры ещё не определены?",
+    answer:
+      "Запишите известные требования, а остальные отметьте как «на согласование». MOQ, сроки, документы и логистика подтверждаются поставщиком для конкретного проекта.",
+  },
+  {
+    title: "Отправляется ли документ поставщику?",
+    answer:
+      "Нет. Файл создаётся в вашем браузере и скачивается на ваше устройство. Сайт не отправляет его поставщику и не оформляет заказ.",
+  },
+];
+export default function Home() {
+  return (
+    <>
+      <section className="hero container">
+        <Image
+          className="hero-image"
+          src="/images/hero-cat.webp"
+          alt="Кошка рядом с образцами гранул и древесной стружки — иллюстрация направлений ассортимента"
+          fill
+          sizes="100vw"
+          priority
+        />
+        <div className="hero-copy">
+          <h1>
+            Забота о питомцах.
+            <br />
+            Продуманный ассортимент.
+          </h1>
+          <p>
+            Наполнители и подстилки Emily pets
+            <br className="desktop-break" /> для закупочных команд российского
+            рынка.
+          </p>
+          <div className="hero-actions">
+            <Link className="button" href="#directions">
+              Выбрать направление
+            </Link>
+            <Link className="inline-link" href="/project">
+              Подготовить проект
+              <Arrow />
+            </Link>
+          </div>
+        </div>
+      </section>
+      <div className="benefits container">
+        <div>
+          <span className="benefit-icon">
+            <BoxIcon />
+          </span>
+          <div>
+            <h2>Две категории</h2>
+            <p>Наполнители для кошек и подстилки для мелких животных.</p>
+          </div>
+        </div>
+        <div>
+          <span className="benefit-icon">
+            <DocumentIcon />
+          </span>
+          <div>
+            <h2>Понятная спецификация</h2>
+            <p>Материал, фасовка и параметры для согласования.</p>
+          </div>
+        </div>
+        <div>
+          <span className="benefit-icon">
+            <DownloadIcon />
+          </span>
+          <div>
+            <h2>Один документ проекта</h2>
+            <p>Ваши требования в файле для дальнейшего обсуждения.</p>
+          </div>
+        </div>
+      </div>
+      <section id="directions" className="section container">
+        <div className="section-heading">
+          <h2>Начните с вашего направления</h2>
+          <p>Выберите категорию и соберите требования к закупке.</p>
+        </div>
+        <CategoryCards />
+      </section>
+      <section className="brief-banner container">
+        <Image src="/images/project-brief.webp" alt="" fill sizes="100vw" />
+        <div>
+          <h2>Отдельные позиции. Единый проект.</h2>
+          <p>
+            Зафиксируйте SKU, версию упаковки и объём партии в одном документе.
+          </p>
+          <Link className="button" href="/project">
+            Собрать спецификацию
+            <Arrow />
+          </Link>
+        </div>
+      </section>
+      <section id="how-it-works" className="section container">
+        <h2>От выбора — к ясному заданию</h2>
+        <div className="steps">
+          {steps.map(({ title, text, Icon }, i) => (
+            <article key={title}>
+              <span className="step-number">0{i + 1}</span>
+              <Icon className="step-icon" />
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="faq section container">
+        <h2>Перед началом проекта</h2>
+        {questions.map((q) => (
+          <details key={q.title}>
+            <summary>
+              {q.title}
+              <Chevron />
+            </summary>
+            <p>{q.answer}</p>
+          </details>
+        ))}
+      </section>
+      <ProjectCta />
+    </>
+  );
+}

@@ -1,3 +1,66 @@
-import ProjectForm from '../../components/project-form';
-export const metadata={title:'Русскоязычная спецификация закупочного проекта',description:'Создайте локальный файл проекта с категориями, SKU, фасовкой и вопросами для согласования.'};
-export default function Project(){return <section className="reading"><h1>Подготовьте проект закупки</h1><p className="lead">Запишите требования и скачайте файл для дальнейшего согласования.</p><p className="notice">Форма работает локально: данные не отправляются и не сохраняются на сервере. Не включайте персональные или конфиденциальные сведения. Это подготовка документа, а не отправка заявки.</p><ProjectForm/></section>}
+import Link from "next/link";
+import ProjectForm from "../../components/project-form";
+import { DocumentIcon } from "../../components/icons";
+import { projectCategoryNames } from "../../data/categories";
+export const metadata = {
+  title: "Русскоязычная спецификация закупочного проекта",
+  description:
+    "Создайте локальный файл проекта с категориями, SKU, фасовкой и вопросами для согласования.",
+  alternates: { canonical: "/project" },
+};
+export default async function Project({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string | string[] }>;
+}) {
+  const category = (await searchParams).category;
+  const selectedCategory =
+    typeof category === "string" &&
+    Object.hasOwn(projectCategoryNames, category)
+      ? category
+      : "";
+  return (
+    <section className="container project-page">
+      <div className="page-intro">
+        <Link className="breadcrumb" href="/">
+          Главная
+        </Link>
+        <h1>
+          Соберите свой
+          <br />
+          закупочный проект.
+        </h1>
+        <p className="lead">
+          От категории и упаковки — до вопросов, которые важно согласовать.
+        </p>
+      </div>
+      <div className="project-layout">
+        <ProjectForm
+          key={selectedCategory}
+          initialCategory={selectedCategory}
+        />
+        <aside className="project-help">
+          <DocumentIcon />
+          <h2>Ясное задание для следующего шага</h2>
+          <p>
+            Для каждой позиции укажите материал, фасовку и количество. Если
+            параметр неизвестен, напишите «на согласование».
+          </p>
+          <ol>
+            <li>Заполните требования.</li>
+            <li>Скачайте документ.</li>
+            <li>Передайте его поставщику самостоятельно.</li>
+          </ol>
+          <p className="caption">
+            Файл создаётся на вашем устройстве. Данные не отправляются и не
+            сохраняются на сервере. Не включайте персональные или
+            конфиденциальные сведения.
+          </p>
+          <Link className="inline-link" href="/assortment">
+            Вернуться к направлениям
+          </Link>
+        </aside>
+      </div>
+    </section>
+  );
+}

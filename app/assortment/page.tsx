@@ -1,3 +1,88 @@
-import Link from 'next/link';
-export const metadata={title:'Ассортимент закупочного проекта',description:'Согласуйте позиции наполнителей и подстилок в одном проекте для российского рынка.'};
-export default function Assortment(){return <section><h1>Ассортимент вашего проекта</h1><p className="lead">Здесь определяют структуру закупки. Описания конкретной продукции и сведения о производстве размещены на основном сайте Emily pets.</p><article className="detail" id="cat-litter"><h2>Наполнители для кошек</h2><p>Для каждой позиции зафиксируйте материал, код SKU, массу или объём пачки и количество упаковок в транспортной единице. Не приравнивайте литры к килограммам без подтверждённых данных о конкретном продукте.</p><ul><li>Направления для обсуждения: тофу, бентонит, древесные материалы, маниока.</li><li>Уточните аромат, размер гранул и метод проверки образца.</li><li>Отметьте, какие позиции входят в первую партию, а какие планируются позднее.</li></ul><a href="https://emilypets.com/ru/product/">Продукция на основном сайте Emily pets</a></article><article className="detail" id="bedding"><h2>Подстилки для мелких животных</h2><p>Разделите позиции по материалу и назначению. Древесная и осиновая стружка не должны автоматически получать одинаковые параметры или рекомендации по применению.</p><ul><li>Укажите целевое применение и требования закупочной команды.</li><li>Зафиксируйте материал, фракцию, фасовку и код образца для согласования.</li><li>Отдельно уточните хранение, транспортную упаковку и документы.</li></ul><p>Наличие конкретного исполнения, параметры и условия заказа требуют подтверждения поставщиком.</p></article><Link className="button" href="/project">Перейти к проекту</Link></section>}
+import Image from "next/image";
+import Link from "next/link";
+import ProjectCta from "../../components/project-cta";
+import { Arrow } from "../../components/icons";
+import { categories } from "../../data/categories";
+export const metadata = {
+  title: "Ассортимент закупочного проекта",
+  description:
+    "Согласуйте позиции наполнителей и подстилок в одном проекте для российского рынка.",
+  alternates: { canonical: "/assortment" },
+};
+export default function Assortment() {
+  return (
+    <>
+      <section className="page-intro container">
+        <Link className="breadcrumb" href="/">
+          Главная
+        </Link>
+        <h1>
+          Два направления.
+          <br />
+          Ваш ассортимент.
+        </h1>
+        <p className="lead">
+          Выберите категории, которые планируете включить в закупочный проект.
+          Конкретные исполнения и условия требуют подтверждения.
+        </p>
+        <div className="category-shortcuts">
+          {categories.map((c) => (
+            <a href={`#${c.id}`} key={c.id}>
+              {c.title}
+              <Arrow />
+            </a>
+          ))}
+        </div>
+      </section>
+      <div className="container">
+        {categories.map((c) => (
+          <section className="category-detail" key={c.id} id={c.id}>
+            <div className="detail-image">
+              <Image
+                src={c.image}
+                alt={c.alt}
+                fill
+                sizes="(max-width: 820px) 100vw, 50vw"
+              />
+            </div>
+            <div>
+              <h2>{c.title}</h2>
+              <p>{c.description}</p>
+              <div className="material-list">
+                {c.materials.map((m) => (
+                  <span key={m}>{m}</span>
+                ))}
+              </div>
+              <h3>Что указать в проекте</h3>
+              <ul className="input-list">
+                {c.inputs.map((input) => (
+                  <li key={input}>{input}</li>
+                ))}
+              </ul>
+              <p className="caption">{c.note}</p>
+              <Link className="button" href={`/project?category=${c.id}`}>
+                Добавить в проект
+                <Arrow />
+              </Link>
+            </div>
+          </section>
+        ))}
+      </div>
+      <aside className="source-note container">
+        <div>
+          <h2>Нужны сведения о конкретном продукте?</h2>
+          <p>
+            Описания продукции и информация о производстве — на основном сайте
+            Emily pets. Изображения здесь иллюстрируют категории и не заменяют
+            спецификацию.
+          </p>
+        </div>
+        <a className="inline-link" href="https://emilypets.com/ru/product/">
+          Продукция Emily pets
+          <Arrow />
+        </a>
+      </aside>
+      <ProjectCta />
+    </>
+  );
+}
