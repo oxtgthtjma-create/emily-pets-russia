@@ -1,3 +1,4 @@
+import FooterVideoProfiles from "./footer-video-profiles";
 import Link from "next/link";
 import FooterInquiry from "./footer-inquiry";
 import { showcaseProducts } from "../data/products";
@@ -101,6 +102,7 @@ export default function SiteFooter() {
           </nav>
           <FooterInquiry />
         </div>
+        <FooterVideoProfiles />
         <div className="company-footer-bottom">
           <p>
             © {new Date().getUTCFullYear()} PUYUAN (DALIAN) PET PRODUCTS CO.,
