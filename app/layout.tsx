@@ -1,0 +1,5 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import './style.css';
+export const metadata: Metadata = { title: { default: 'Закупочные проекты для российского рынка | Emily pets', template: '%s | Emily pets' }, description: 'Подготовка русскоязычного закупочного проекта: наполнители для кошек и подстилки для мелких животных.', robots: { index: false, follow: true } };
+export default function Layout({children}: {children: React.ReactNode}) { return <html lang="ru" dir="ltr"><body><a className="skip" href="#main">К содержимому</a><header><Link className="brand" href="/">Emily<span>pets</span><small>Для профессиональных закупок</small></Link><nav aria-label="Основная навигация"><Link href="/assortment">Ассортимент</Link><Link href="/about">О проекте</Link><Link className="button" href="/project">Подготовить проект</Link></nav></header><main id="main">{children}</main><footer><div className="brand">Emily pets</div><p>Наполнители и подстилки · Проекты для российского рынка</p><p>Предварительная версия. Условия поставки подтверждаются отдельно.</p><Link href="/about">Источники и назначение сайта</Link></footer></body></html> }

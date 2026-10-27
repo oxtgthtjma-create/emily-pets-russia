@@ -1,0 +1,3 @@
+import ProjectForm from '../../components/project-form';
+export const metadata={title:'Русскоязычная спецификация закупочного проекта',description:'Создайте локальный файл проекта с категориями, SKU, фасовкой и вопросами для согласования.'};
+export default function Project(){return <section className="reading"><h1>Подготовьте проект закупки</h1><p className="lead">Запишите требования и скачайте файл для дальнейшего согласования.</p><p className="notice">Форма работает локально: данные не отправляются и не сохраняются на сервере. Не включайте персональные или конфиденциальные сведения. Это подготовка документа, а не отправка заявки.</p><ProjectForm/></section>}
