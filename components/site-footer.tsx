@@ -75,6 +75,7 @@ export default function SiteFooter() {
             <Link href="/assortment">Продукция</Link>
             <Link href="/blog">Блог</Link>
             <Link href="/freight">Морская доставка</Link>
+            <Link href="/tools">Инструменты покупателя</Link>
             <a href="#contacts">Контакты</a>
           </nav>
           <nav className="footer-link-column" aria-label="Продукция в подвале">

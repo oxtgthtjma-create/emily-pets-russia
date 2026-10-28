@@ -37,6 +37,15 @@ export default async function Assortment({
           характеристики.
         </p>
       </section>
+      <div className="container tools-entry">
+        <div>
+          <strong>Сравните фасовки и подготовьте партию</strong>
+          <p>Короба, цена за кг или литр и список вопросов до заказа.</p>
+        </div>
+        <Link className="inline-link" href="/tools">
+          Инструменты покупателя <Arrow />
+        </Link>
+      </div>
       <PurchaseOptions />
       <section
         className="container catalog-section"
