@@ -1,3 +1,4 @@
+import TrustOverview from "../components/trust-overview";
 import PurchaseOptions from "../components/purchase-options";
 import Image from "next/image";
 import Link from "next/link";
@@ -111,6 +112,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <TrustOverview />
       <section id="directions" className="section container">
         <div className="section-heading">
           <h2>Начните с вашего направления</h2>

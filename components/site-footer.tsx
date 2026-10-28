@@ -72,6 +72,7 @@ export default function SiteFooter() {
             <h2>Навигация</h2>
             <Link href="/">Главная</Link>
             <Link href="/about">О компании</Link>
+            <Link href="/trust">Компания и документы</Link>
             <Link href="/assortment">Продукция</Link>
             <Link href="/blog">Блог</Link>
             <Link href="/freight">Морская доставка</Link>

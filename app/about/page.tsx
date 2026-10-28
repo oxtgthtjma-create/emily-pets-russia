@@ -1,3 +1,4 @@
+import TrustOverview from "../../components/trust-overview";
 import Image from "next/image";
 import Link from "next/link";
 import ProjectCta from "../../components/project-cta";
@@ -74,6 +75,7 @@ export default function About() {
           ))}
         </dl>
       </section>
+      <TrustOverview />
       <section className="company-principles container">
         <h2>Один язык. Ясные требования.</h2>
         <p>
