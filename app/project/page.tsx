@@ -1,3 +1,4 @@
+import { parseDesign } from "../../data/packaging-options";
 import Link from "next/link";
 import ProjectForm from "../../components/project-form";
 import { DocumentIcon } from "../../components/icons";
@@ -17,6 +18,7 @@ export default async function Project({
     category?: string | string[];
     product?: string | string[];
     mode?: string | string[];
+    design?: string | string[];
   }>;
 }) {
   const query = await searchParams;
@@ -27,6 +29,7 @@ export default async function Project({
     typeof query.mode === "string" && Object.hasOwn(purchaseModes, query.mode)
       ? query.mode
       : "brand";
+  const design = selectedMode === "custom" ? parseDesign(query.design) : "";
   const category = product?.category ?? query.category;
   const selectedCategory =
     typeof category === "string" &&
@@ -50,13 +53,18 @@ export default async function Project({
       </div>
       <div className="project-layout">
         <ProjectForm
-          key={selectedCategory + (product?.id ?? "") + selectedMode}
+          key={selectedCategory + (product?.id ?? "") + selectedMode + design}
           initialMode={selectedMode}
           initialCategory={selectedCategory}
           initialItems={
             product
               ? product.name +
-                ": фасовка, упаковка и количество на согласование."
+                ": фасовка, упаковка и количество на согласование." +
+                (design
+                  ? " Эскиз: " +
+                    design +
+                    "; параметры и изготовление на согласование."
+                  : "")
               : ""
           }
         />

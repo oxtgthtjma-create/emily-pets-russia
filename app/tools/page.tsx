@@ -26,6 +26,7 @@ export default function Tools() {
           <a href="#compare">Сравнение цен ↓</a>
           <a href="#checklist">Список до заказа ↓</a>
           <Link href="/freight">Морская доставка →</Link>
+          <Link href="/explore">Интерактивный ассортимент →</Link>
         </nav>
         <p className="caption">
           Работают в браузере. Введённые значения не отправляются на сервер.

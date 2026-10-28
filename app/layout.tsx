@@ -1,3 +1,4 @@
+import PetAssistant from "../components/pet-assistant";
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteFooter from "../components/site-footer";
@@ -58,6 +59,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </nav>
         <main id="main">{children}</main>
         <SiteFooter />
+        <PetAssistant />
       </body>
     </html>
   );
